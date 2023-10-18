@@ -1,0 +1,216 @@
+﻿// Metoder, array och sort
+            //string[] cars = {" Volvo", " Saab", " Renault", " Opel", " Hyundai" };
+            //Array.Sort(cars);
+            //foreach (string car in cars) {
+            //    Write(car);
+            //}
+
+            //string[] citys = {"Helsingfors", " Oslo" ," Stockholm " ," Köpenhamn" };
+            //Array.Sort(citys);
+            //for (int i = 0; i < citys.Length; i++) {
+            //    WriteLine(citys[i]);
+            //}
+
+            //int[] numberOne = {10, 9, 6, 8, 5, 3, 7, 4, 2, 1,};
+            //Array.Sort(numberOne);
+            //Array.Reverse(numberOne);
+            //foreach (int number in numberOne) {
+            //    WriteLine(number);
+            //}
+
+
+            // Countdown from 10, recursive method. 
+            //countDown(10);
+            //void countDown(int number)
+            //{
+            //    if (number == 0) return;
+            //    WriteLine(number);
+            //    countDown(number - 1);
+            //}
+
+              UserManager userManager = new UserManager();
+            
+            // Lägga till användare 
+            User user1 = new User("Alice", 45);
+            User user2 = new User("Linda", 31);
+
+            userManager.AddUser(user1);
+            userManager.AddUser(user2);
+            // Lägga till flera användare på en angiven position
+            List<User> newUsers = new List<User>() { new User("Charlie", 45), new User("David", 100) }; // Hårdkodad nya användare
+            userManager.InsertUsers(1, newUsers);
+
+            // Ta bort en användare
+            userManager.RemoveUser("Alice");
+
+            // Hämta antal användare
+            WriteLine("Antal användare: " + userManager.GetUserCount());
+            
+            // Visa antal användare
+            userManager.DisplayUsers();
+
+            // Rensa användarlistan             
+            userManager.ClearUsers();
+            WriteLine("Listan har rensats... ");
+            WriteLine("Antal användare efter rensning: " + userManager.GetUserCount());
+
+              class User 
+    {
+        public string Name { get; set; } 
+        public int Age { get; set; }
+
+        public User(string name, int age) // construktor
+        {
+            Name = name;
+            Age = age;
+        }
+        public override string ToString() // Metoden 
+        {
+            return $"Name: {Name}, Age: {Age}";
+        }
+    }
+
+    class UserManager 
+    {
+        private List<User> users; // Bara deklarerad 
+
+        public UserManager()
+        {
+            users = new List<User>(); // skapa nytt objekt 
+        }
+        // Datatypen User och variabeln user
+        // Metod AddUser
+        public void AddUser(User user)  
+        { 
+        users.Add(user); // users är listan
+        }
+        // Metod InsertUsers
+        // En ny lista newUsers
+        public void InsertUsers(int index, List<User> newUsers) 
+        {
+            users.InsertRange(index, newUsers);
+        }
+        public void RemoveUser(string name) 
+        {
+           User userToRemove = null;
+            foreach (var user in users) 
+            {
+                if (user.Name == name) // Name är egenskapen
+                {
+                    userToRemove = user;
+                    break;
+                }
+            }
+            if (userToRemove != null)
+            {
+                users.Remove(userToRemove);
+            }
+            else {
+                WriteLine("User not found");
+            }
+        }
+        public int GetUserCount() 
+        {
+            return users.Count;
+        }
+        public void ClearUsers() 
+        { 
+            users.Clear();
+        }
+        public void DisplayUsers() 
+        {
+            WriteLine("Users: ");
+            foreach (var user in users) 
+            {
+                WriteLine(user);
+            }
+        }
+    }
+
+
+      public void GetInfo()
+        {
+            Console.WriteLine("What is your name? ");
+            string _userName = Console.ReadLine();
+
+            Console.WriteLine($"What is your age {_userName} ? ");
+            int _userAge = int.Parse(Console.ReadLine());
+
+            Console.WriteLine($"What is your profession {_userName} ?");
+            string _userProfession = Console.ReadLine();
+
+            (string name, int age, string profession) HämtaPersonInfo() => (_userName, _userAge, _userProfession); //tuple
+            {
+                Console.WriteLine($"Your name: {_userName}, your age: {_userAge} and your profession: {_userProfession}");
+            };
+        }
+
+        public void OpenChest()
+        {
+            Chest currentState = Chest.Locked;
+            while (true)
+            {
+                Write($"The chest is currenty {currentState} , what do you want to do? ");
+                string input = ReadLine();
+
+                if (currentState == Chest.Locked && input == "unlock") currentState = Chest.Closed;
+                if (currentState == Chest.Closed && input == "open") currentState = Chest.Open;
+                if (currentState == Chest.Closed && input == "lock") currentState = Chest.Locked;
+                if (currentState == Chest.Open && input == "close") currentState = Chest.Closed;
+            }
+
+        }
+        enum Chest { Open, Closed, Locked }
+        public void SimulaSoup() {
+
+            (SoupType type, MainIngredient ingredient, Seasoning seasoning) soup = GetSoup(); //tuple
+            WriteLine($"{soup.seasoning} {soup.ingredient} {soup.type}");
+            (SoupType, MainIngredient, Seasoning) GetSoup()
+            {
+                SoupType type = GetSoupType();
+                MainIngredient ingredient = GetMainIngredient();
+                Seasoning seasoning = GetSeasoning();
+                return (type, ingredient, seasoning);
+            }
+
+        }
+
+        MainIngredient GetMainIngredient()
+        {
+            WriteLine("Main ingredient is: mushroom, chicken, carrot and potato.");
+            string input = ReadLine();
+            return input switch
+            {
+                "mushroom" => MainIngredient.Mushrooms,
+                "chicken" => MainIngredient.Chicken,
+                "carrot" => MainIngredient.Carrots,
+                "potato" => MainIngredient.Potatoes
+            };
+        }
+        SoupType GetSoupType()
+        {
+            WriteLine("Soup type is: soup, stew and gumbo.");
+            string input = ReadLine();
+            return input switch
+            {
+                "soup" => SoupType.Soup,
+                "stew" => SoupType.Stew,
+                "gumbo" => SoupType.Gumbo,
+
+            };
+        }
+        Seasoning GetSeasoning()
+        {
+            WriteLine("Seasoning is: spicy, salt and sweet.");
+            string input = ReadLine();
+            return input switch
+            {
+                "spicy" => Seasoning.Spicy,
+                "salt" => Seasoning.Salt,
+                "sweet" => Seasoning.Sweet,
+
+            };
+        }
+        enum SoupType { Soup, Stew, Gumbo }
+        enum MainIngredient { Mushrooms, Chicken, Carrots, Potatoes }
+        enum Seasoning { Spicy, Salt, Sweet }
