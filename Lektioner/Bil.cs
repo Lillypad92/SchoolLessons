@@ -14,33 +14,33 @@ namespace BilInterface
         public void CarRun()
         {
 
-            //int n;
-            //Console.WriteLine("Ange antal bilar: ");
-            //n = int.Parse(Console.ReadLine());
+            int n;
+            Console.WriteLine("Ange antal bilar: ");
+            n = int.Parse(Console.ReadLine());
 
-            //Bil[] arrayBilar = new Bil[n];
-            //for (int i = 0; i < n; i++)
-            //{
-            //    arrayBilar[i] = new Bil("", 0);
-            //    InmätningBilar(arrayBilar[i]);
-            //    Console.WriteLine();
-            //}
-            //Console.WriteLine();
-            //Array.Sort(arrayBilar);
-            //Console.WriteLine("\nArray sorterad efter tillverkare (stigande ordning)\n");
+            Bil[] arrayBilar = new Bil[n];
+            for (int i = 0; i < n; i++)
+            {
+                arrayBilar[i] = new Bil("", 0);
+                InmätningBilar(arrayBilar[i]);
+                Console.WriteLine();
+            }
+            Console.WriteLine();
+            Array.Sort(arrayBilar);
+            Console.WriteLine("\nArray sorterad efter tillverkare (stigande ordning)\n");
 
-            //Array.Sort(arrayBilar, Bil.sortYearAscendin());
-            //Console.WriteLine("\nArray sorterad efter tillverkningsår (stigande ordning)\n");
+            Array.Sort(arrayBilar, Bil.sortYearAscendin());
+            Console.WriteLine("\nArray sorterad efter tillverkningsår (stigande ordning)\n");
 
-            //Array.Sort(arrayBilar, Bil.sortMakesDescending());
-            //Console.WriteLine("\nArray sorterad efter tillverkare (fallande ordning)\n");
-            //UtskriftBilar(arrayBilar);
+            Array.Sort(arrayBilar, Bil.sortMakesDescending());
+            Console.WriteLine("\nArray sorterad efter tillverkare (fallande ordning)\n");
+            UtskriftBilar(arrayBilar);
 
-            //Array.Sort(arrayBilar, Bil.sortYearDescending());
-            //Console.WriteLine("\nArray sorterad efter tillverkningsår (fallabde ordning)\n");
-            //UtskriftBilar(arrayBilar);
+            Array.Sort(arrayBilar, Bil.sortYearDescending());
+            Console.WriteLine("\nArray sorterad efter tillverkningsår (fallabde ordning)\n");
+            UtskriftBilar(arrayBilar);
 
-            //Console.ReadKey();
+            Console.ReadKey();
         }
 
         private string tillverkare;
@@ -130,22 +130,21 @@ namespace BilInterface
         {
             return new SortTillverkareFallande();
         }
-    }
-    static void InmätningBilar(Bil c)
-    {
-        Console.WriteLine("Ange bilinformation: ");
-        Console.WriteLine("Tillverkare: ");
-        c.Tillverkare = Console.ReadLine();
-        Console.WriteLine("Tillverkningsår: ");
-        c.År = int.Parse(Console.ReadLine());
-    }
-    static void UtskriftBilar(Bil[] arrayBilar)
-    {
-        foreach (Bil c in arrayBilar)
+        static void InmätningBilar(Bil c)
         {
-            Console.WriteLine(c.Tillverkare + "\t\t" + c.År);
+            Console.WriteLine("Ange bilinformation: ");
+            Console.WriteLine("Tillverkare: ");
+            c.Tillverkare = Console.ReadLine();
+            Console.WriteLine("Tillverkningsår: ");
+            c.År = int.Parse(Console.ReadLine());
+        }
+        static void UtskriftBilar(Bil[] arrayBilar)
+        {
+            foreach (Bil c in arrayBilar)
+            {
+                Console.WriteLine(c.Tillverkare + "\t\t" + c.År);
+            }
         }
     }
-   
 }
 
